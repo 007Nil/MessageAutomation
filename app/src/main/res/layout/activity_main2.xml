@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.MainActivity"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:id="@+id/labelEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:fontFamily="@font/capriola"
+        android:text="Hello"
+        android:textColor="#fff"
+        android:textSize="40sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/capriola"
+        android:text="You are currently"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:textStyle="normal" />
+
+    <RadioGroup
+        android:id="@+id/stateGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50sp">
+        <RadioButton
+            android:id="@+id/meeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="In a meeting"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            android:fontFamily="@font/capriola"/>
+        <RadioButton
+            android:id="@+id/game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="In a game"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            android:fontFamily="@font/capriola"/>
+        <RadioButton
+            android:id="@+id/work"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="In a work"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            android:fontFamily="@font/capriola"/>
+        <RadioButton
+            android:id="@+id/awayFromPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Away from phone"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            android:fontFamily="@font/capriola"/>
+        <RadioButton
+            android:id="@+id/sleep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sleeping"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            android:fontFamily="@font/capriola"/>
+        <RadioButton
+            android:id="@+id/available"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Available"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            android:fontFamily="@font/capriola"/>
+    </RadioGroup>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status : "
+            android:textSize="20sp"
+            android:textColor="#fff"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Available"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:textSize="20sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Message : "
+            android:textSize="20sp"
+            android:textColor="#fff"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Message to be send"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:textSize="20sp"/>
+    </LinearLayout>
+</LinearLayout>
