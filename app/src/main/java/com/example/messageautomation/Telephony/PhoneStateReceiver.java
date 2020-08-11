@@ -1,4 +1,4 @@
-package com.example.messageautomation.Activity.Telephony;
+package com.example.messageautomation.Telephony;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

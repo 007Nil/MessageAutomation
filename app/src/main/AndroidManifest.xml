@@ -31,7 +31,7 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <receiver android:name=".Activity.Telephony.PhoneStateReceiver">
+        <receiver android:name=".Telephony.PhoneStateReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE" />
                 <action android:name="android.intent.action.READ_CALL_LOG" />
