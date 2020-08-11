@@ -13,7 +13,8 @@
         android:roundIcon="@drawable/logo_bg"
         android:supportsRtl="true"
         android:theme="@style/AppTheme1">
-        <activity android:name=".Activity.MainActivity2"></activity>
+        <activity android:name=".Activity.MainActivity2"
+            tools:ignore="MissingClass"></activity>
         <activity
             android:name=".Activity.SplashActivity"
             android:theme="@style/SplashTheme">
