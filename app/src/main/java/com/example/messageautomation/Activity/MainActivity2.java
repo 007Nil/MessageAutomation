@@ -3,6 +3,7 @@ package com.example.messageautomation.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -35,9 +36,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     public static String loadData(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        String text = sharedPreferences.getString("state", "Sorry the owner isn't available." +
-                " Will get back to you as soon as available." +
-                "\n\nThis message is auto-generated from message automation.");
+        String text = sharedPreferences.getString("state", "available");
         return text;
     }
 
