@@ -13,24 +13,35 @@ import android.preference.PreferenceManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.messageautomation.R;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity2 extends AppCompatActivity {
 
     private static final String SHARED_PREFS = "sharedPrefs";
-    private static final String KEY = "state";
 
-    public static void saveData(Context context,String text) {
+    public static void saveData(Context context,String key,String text) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY, text);
+        editor.putString(key, text);
         editor.apply();
     }
 
     public static String loadData(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        String text = sharedPreferences.getString(KEY, "available");
+        String text = sharedPreferences.getString("state", "available");
+        return text;
+    }
+
+    public static String loadMsg(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        String text = sharedPreferences.getString("message", "No message will be send");
         return text;
     }
 
@@ -39,61 +50,62 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        String username="",state="";
+        String username="",state="",messageStored="";
         final TextView labelEdit,status,message;
         RadioButton meeting,game,work,awayFromPhone,sleep,available;
         RadioGroup stateGroup;
 
-        username = PreferenceManager.getDefaultSharedPreferences(MainActivity2.this).getString("username","");
-
         labelEdit = findViewById(R.id.labelEdit);
-
         meeting = findViewById(R.id.meeting);
         game = findViewById(R.id.game);
         work = findViewById(R.id.work);
         awayFromPhone = findViewById(R.id.awayFromPhone);
         sleep = findViewById(R.id.sleep);
         available = findViewById(R.id.available);
-
         stateGroup = findViewById(R.id.stateGroup);
-
         status = findViewById(R.id.status);
-
         message = findViewById(R.id.message);
 
-        labelEdit.setText("Hello "+username);
+        username = PreferenceManager.getDefaultSharedPreferences(MainActivity2.this).getString("username","");
+
+        Date time = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("HHmm");
+        String currentTime = dateFormat.format(time);
+        if(Integer.parseInt(currentTime) >= 0600 && Integer.parseInt(currentTime) <1200){
+            labelEdit.setText("Good Morning "+username);
+        }else if(Integer.parseInt(currentTime) >= 1200 && Integer.parseInt(currentTime) <1600){
+            labelEdit.setText("Good Afternoon "+username);
+        }else{
+            labelEdit.setText("Good Evening "+username);
+        }
 
         state = loadData(MainActivity2.this);
+        messageStored = loadMsg(MainActivity2.this);
 
         if(state.contains("meeting")){
             meeting.setChecked(true);
             status.setText("In a meeting");
-            message.setText("Hi there, " + username + " is attending a meeting at the current moment. He will get back to you when available." +
-                    "\n\nThank You\nChatBot");
+            message.setText(messageStored);
         }else if(state.contains("game")){
             game.setChecked(true);
             status.setText("In a game");
-            message.setText("Hi there, " + username + " is gaming at the current moment. He will get back to you when available." +
-                    "\n\nThank You\nChatBot");
+            message.setText(messageStored);
         }else if(state.contains("work")){
             work.setChecked(true);
             status.setText("In a work");
-            message.setText("Hi there, " + username + " is working at the current moment. He will get back to you when available." +
-                    "\n\nThank You\nChatBot");
+            message.setText(messageStored);
         }else if(state.contains("awayFromPhone")){
             awayFromPhone.setChecked(true);
             status.setText("Away from phone");
-            message.setText("Hi there, " + username + " is away from phone at the current moment. He will get back to you when available." +
-                    "\n\nThank You\nChatBot");
+            message.setText(messageStored);
         }else if(state.contains("sleep")){
             sleep.setChecked(true);
             status.setText("Sleeping");
-            message.setText("Hi there, " + username + " is sleeping at the current moment. He will get back to you when available." +
-                    "\n\nThank You\nChatBot");
+            message.setText(messageStored);
         }else if(state.contains("available")){
             available.setChecked(true);
             status.setText("Available");
-            message.setText("No message will be send");
+            message.setText(messageStored);
         }
 
         final String finalUsername = username;
@@ -105,42 +117,47 @@ public class MainActivity2 extends AppCompatActivity {
                     AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 
-                    saveData(MainActivity2.this,"meeting");
+                    saveData(MainActivity2.this,"state","meeting");
                     status.setText("In a meeting");
-                    message.setText("Hi there, " + finalUsername + " is attending a meeting at the current moment. He will get back to you when available." +
+                    message.setText("Hi there, " + finalUsername + " is attending a meeting at the current moment. " + finalUsername + " will get back to you when available." +
                             "\n\nThank You\nChatBot");
+                    saveData(MainActivity2.this,"message",message.getText().toString());
                 }else if(i == R.id.game){
                     AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 
-                    saveData(MainActivity2.this,"game");
+                    saveData(MainActivity2.this,"state","game");
                     status.setText("In a game");
-                    message.setText("Hi there, " + finalUsername + " is gaming at the current moment. He will get back to you when available." +
+                    message.setText("Hi there, " + finalUsername + " is gaming at the current moment. " + finalUsername + " will get back to you when available." +
                             "\n\nThank You\nChatBot");
+                    saveData(MainActivity2.this,"message",message.getText().toString());
                 }else if(i == R.id.work){
                     AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 
-                    saveData(MainActivity2.this,"work");
+                    saveData(MainActivity2.this,"state","work");
                     status.setText("In a work");
-                    message.setText("Hi there, " + finalUsername + " is working at the current moment. He will get back to you when available." +
+                    message.setText("Hi there, " + finalUsername + " is working at the current moment. " + finalUsername + " will get back to you when available." +
                             "\n\nThank You\nChatBot");
+                    saveData(MainActivity2.this,"message",message.getText().toString());
                 }else if(i == R.id.awayFromPhone){
                     AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 
-                    saveData(MainActivity2.this,"awayFromPhone");
+                    saveData(MainActivity2.this,"state","awayFromPhone");
                     status.setText("Away from phone");
-                    message.setText("Hi there, " + finalUsername + " is away from phone at the current moment. He will get back to you when available." +
+                    message.setText("Hi there, " + finalUsername + " is away from phone at the current moment. " + finalUsername + " will get back to you when available." +
                             "\n\nThank You\nChatBot");
+                    saveData(MainActivity2.this,"message",message.getText().toString());
                 }else if(i == R.id.sleep){
                     AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 
-                    saveData(MainActivity2.this,"sleep");
+                    saveData(MainActivity2.this,"state","sleep");
                     status.setText("Sleeping");
-                    message.setText("Hi there, " + finalUsername + " is sleeping at the current moment. He will get back to you when available." +
+                    message.setText("Hi there, " + finalUsername + " is sleeping at the current moment. " + finalUsername + " will get back to you when available." +
                             "\n\nThank You\nChatBot");
+                    saveData(MainActivity2.this,"message",message.getText().toString());
                 }else if(i == R.id.available){
 
                     AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
@@ -149,9 +166,10 @@ public class MainActivity2 extends AppCompatActivity {
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                     audioManager.setStreamVolume(AudioManager.STREAM_RING, maxVolume, AudioManager.FLAG_SHOW_UI + AudioManager.FLAG_PLAY_SOUND);
 
-                    saveData(MainActivity2.this,"available");
+                    saveData(MainActivity2.this,"state","available");
                     status.setText("Available");
                     message.setText("No message will be send");
+                    saveData(MainActivity2.this,"message",message.getText().toString());
                 }
             }
         });

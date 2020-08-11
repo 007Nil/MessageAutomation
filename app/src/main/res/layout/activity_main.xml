@@ -15,7 +15,7 @@
         android:layout_marginTop="220dp"
         android:fontFamily="@font/capriola"
         android:text="Welcome"
-        android:textColor="#fff"
+        android:textColor="@color/navyBlue"
         android:textSize="40sp"
         android:textStyle="normal" />
 
@@ -25,7 +25,7 @@
         android:layout_marginTop="55dp"
         android:fontFamily="@font/capriola"
         android:text="Before getting started please enter your details"
-        android:textColor="#fff"
+        android:textColor="@color/navyBlue"
         android:textSize="24sp"
         android:textStyle="normal" />
 
@@ -33,12 +33,12 @@
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:fontFamily="@font/capriola"
         android:hint="Enter your name here"
         android:inputType="textPersonName"
         android:textSize="24sp"
-        android:textColor="#fff"/>
+        android:textColor="@color/navyBlue"/>
 
     <Button
         android:id="@+id/submit"
