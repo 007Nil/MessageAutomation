@@ -17,22 +17,36 @@ public class PhoneStateReceiver extends BroadcastReceiver {
     private String currentState;
     private String message;
     private SendMessage sendMessage = new SendMessage();
+    private static boolean callRinging=false;
+    private static boolean callReceived =false;
+
 
     @Override
     public void onReceive(Context context, Intent intent) {
         try {
             callState = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
             incomingNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
-            if (callState.equals(TelephonyManager.EXTRA_STATE_RINGING) && incomingNumber != null){
-                Toast.makeText(context, "Ringing State Number is - " + incomingNumber, Toast.LENGTH_SHORT).show();
-//                System.out.println(sharedPreferencesCustom.loadData(context));
-//                System.out.println(sharedPreferencesCustom.loadMsg(context));
+            if (callState.equals(TelephonyManager.EXTRA_STATE_RINGING) && incomingNumber != null) {
+                callRinging = true;
                 currentState = sharedPreferencesCustom.loadData(context);
                 message = sharedPreferencesCustom.loadMsg(context);
-
                 if (!currentState.equals("available")){
                     sendMessage.sendSMS(incomingNumber,message,context);
+                    callRinging = false;
                 }
+            }
+
+            if(callState.equals(TelephonyManager.EXTRA_STATE_OFFHOOK) && incomingNumber != null){
+                callReceived = true;
+            }
+
+            if(callState.equals(TelephonyManager.EXTRA_STATE_IDLE) && incomingNumber != null){
+                message = sharedPreferencesCustom.loadMsg(context);
+                if(callRinging && !callReceived){
+                    sendMessage.sendSMS(incomingNumber,message,context);
+                }
+                callRinging = false;
+                callReceived = false;
             }
         }
         catch (Exception e) {
@@ -41,4 +55,6 @@ public class PhoneStateReceiver extends BroadcastReceiver {
 
 
     }
+
+
 }

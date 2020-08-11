@@ -35,13 +35,17 @@ public class MainActivity2 extends AppCompatActivity {
 
     public static String loadData(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        String text = sharedPreferences.getString("state", "available");
+        String text = sharedPreferences.getString("state", "Sorry the owner isn't available." +
+                " Will get back to you as soon as available." +
+                "\n\nThis message is auto-generated from message automation.");
         return text;
     }
 
     public static String loadMsg(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        String text = sharedPreferences.getString("message", "No message will be send");
+        String text = sharedPreferences.getString("message", "Sorry the owner isn't available." +
+                " Will get back to you as soon as available." +
+                "\n\nThis message is auto-generated from message automation.");
         return text;
     }
 
@@ -96,7 +100,7 @@ public class MainActivity2 extends AppCompatActivity {
             message.setText(messageStored);
         }else if(state.contains("awayFromPhone")){
             awayFromPhone.setChecked(true);
-            status.setText("Away from phone");
+            status.setText("Driving");
             message.setText(messageStored);
         }else if(state.contains("sleep")){
             sleep.setChecked(true);
@@ -119,8 +123,8 @@ public class MainActivity2 extends AppCompatActivity {
 
                     saveData(MainActivity2.this,"state","meeting");
                     status.setText("In a meeting");
-                    message.setText("Hi there, " + finalUsername + " is attending a meeting at the current moment. " + finalUsername + " will get back to you when available." +
-                            "\n\nThank You\nChatBot");
+                    message.setText("Hi there, " + finalUsername + " is attending a meeting at the current moment. Will get back to you when available." +
+                            "\n\nThis message is auto-generated from message automation.");
                     saveData(MainActivity2.this,"message",message.getText().toString());
                 }else if(i == R.id.game){
                     AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
@@ -128,8 +132,8 @@ public class MainActivity2 extends AppCompatActivity {
 
                     saveData(MainActivity2.this,"state","game");
                     status.setText("In a game");
-                    message.setText("Hi there, " + finalUsername + " is gaming at the current moment. " + finalUsername + " will get back to you when available." +
-                            "\n\nThank You\nChatBot");
+                    message.setText("Hi there, " + finalUsername + " is gaming at the current moment. Will get back to you when available." +
+                            "\n\nThis message is auto-generated from message automation.");
                     saveData(MainActivity2.this,"message",message.getText().toString());
                 }else if(i == R.id.work){
                     AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
@@ -137,17 +141,17 @@ public class MainActivity2 extends AppCompatActivity {
 
                     saveData(MainActivity2.this,"state","work");
                     status.setText("In a work");
-                    message.setText("Hi there, " + finalUsername + " is working at the current moment. " + finalUsername + " will get back to you when available." +
-                            "\n\nThank You\nChatBot");
+                    message.setText("Hi there, " + finalUsername + " is working at the current moment. Will get back to you when available." +
+                            "\n\nThis message is auto-generated from message automation.");
                     saveData(MainActivity2.this,"message",message.getText().toString());
                 }else if(i == R.id.awayFromPhone){
                     AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 
                     saveData(MainActivity2.this,"state","awayFromPhone");
-                    status.setText("Away from phone");
-                    message.setText("Hi there, " + finalUsername + " is away from phone at the current moment. " + finalUsername + " will get back to you when available." +
-                            "\n\nThank You\nChatBot");
+                    status.setText("Driving");
+                    message.setText("Hi there, " + finalUsername + " is driving at the current moment. Will get back to you when available." +
+                            "\n\nThis message is auto-generated from message automation.");
                     saveData(MainActivity2.this,"message",message.getText().toString());
                 }else if(i == R.id.sleep){
                     AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
@@ -155,8 +159,8 @@ public class MainActivity2 extends AppCompatActivity {
 
                     saveData(MainActivity2.this,"state","sleep");
                     status.setText("Sleeping");
-                    message.setText("Hi there, " + finalUsername + " is sleeping at the current moment. " + finalUsername + " will get back to you when available." +
-                            "\n\nThank You\nChatBot");
+                    message.setText("Hi there, " + finalUsername + " is sleeping at the current moment. Will get back to you when available." +
+                            "\n\nThis message is auto-generated from message automation.");
                     saveData(MainActivity2.this,"message",message.getText().toString());
                 }else if(i == R.id.available){
 
@@ -168,11 +172,12 @@ public class MainActivity2 extends AppCompatActivity {
 
                     saveData(MainActivity2.this,"state","available");
                     status.setText("Available");
-                    message.setText("No message will be send");
+                    message.setText("Sorry the owner isn't available." +
+                            " Will get back to you as soon as available." +
+                            "\n\nThis message is auto-generated from message automation.");
                     saveData(MainActivity2.this,"message",message.getText().toString());
                 }
             }
         });
-
     }
 }

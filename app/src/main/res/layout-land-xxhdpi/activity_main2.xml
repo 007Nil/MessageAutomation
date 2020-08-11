@@ -81,7 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/capriola"
-                    android:text="Away from phone"
+                    android:text="Driving"
                     android:textColor="@color/navyBlue"
                     android:textSize="24sp"
                     android:layout_margin="10dp"/>
