@@ -19,7 +19,7 @@ public class PhoneStateReceiver extends BroadcastReceiver {
     private SendMessage sendMessage = new SendMessage();
     private static boolean callRinging=false;
     private static boolean callReceived =false;
-
+    private String state;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -28,12 +28,13 @@ public class PhoneStateReceiver extends BroadcastReceiver {
             incomingNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
             if (callState.equals(TelephonyManager.EXTRA_STATE_RINGING) && incomingNumber != null) {
                 callRinging = true;
-                currentState = sharedPreferencesCustom.loadData(context);
+                /*currentState = sharedPreferencesCustom.loadData(context);
                 message = sharedPreferencesCustom.loadMsg(context);
                 if (!currentState.equals("available")){
                     sendMessage.sendSMS(incomingNumber,message,context);
                     callRinging = false;
-                }
+                    state = currentState;
+                }*/
             }
 
             if(callState.equals(TelephonyManager.EXTRA_STATE_OFFHOOK) && incomingNumber != null){
@@ -41,8 +42,13 @@ public class PhoneStateReceiver extends BroadcastReceiver {
             }
 
             if(callState.equals(TelephonyManager.EXTRA_STATE_IDLE) && incomingNumber != null){
+                currentState = sharedPreferencesCustom.loadData(context);
                 message = sharedPreferencesCustom.loadMsg(context);
-                if(callRinging && !callReceived){
+                if(callRinging && !callReceived && currentState.equals("available")){
+                    sendMessage.sendSMS(incomingNumber,message,context);
+                }else if(callRinging && callReceived && !currentState.equals("available")){
+                    Toast.makeText(context,"Since you received the call message will not be sent",Toast.LENGTH_LONG).show();
+                }else if(callRinging && !callReceived){
                     sendMessage.sendSMS(incomingNumber,message,context);
                 }
                 callRinging = false;
