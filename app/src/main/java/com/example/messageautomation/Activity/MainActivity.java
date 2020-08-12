@@ -1,6 +1,8 @@
 package com.example.messageautomation.Activity;
 
 import android.Manifest;
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -22,6 +24,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.messageautomation.R;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,11 +53,10 @@ public class MainActivity extends AppCompatActivity {
 //        DND Permissions
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
                 && !notificationManager.isNotificationPolicyAccessGranted()) {
-
+            Toast.makeText(this,"Please allow Message Automation for DND permissions",Toast.LENGTH_LONG).show();
             Intent intent = new Intent(
                     android.provider.Settings
                             .ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-
             startActivity(intent);
         }
 
@@ -68,11 +72,11 @@ public class MainActivity extends AppCompatActivity {
             submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    SharedPreferences.Editor sPE = PreferenceManager.getDefaultSharedPreferences(getBaseContext()).edit();
-                    sPE.putBoolean("Seen", true);
-                    sPE.apply();
-
                     if (!username.getText().toString().isEmpty()) {
+                        SharedPreferences.Editor sPE = PreferenceManager.getDefaultSharedPreferences(getBaseContext()).edit();
+                        sPE.putBoolean("Seen", true);
+                        sPE.apply();
+
                         Intent changeActivity = new Intent(MainActivity.this, MainActivity2.class);
                         PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putString("username", username.getText().toString()).apply();
                         startActivity(changeActivity);

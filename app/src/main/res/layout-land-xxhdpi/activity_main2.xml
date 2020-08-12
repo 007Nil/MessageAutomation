@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/app_bg_land"
+    android:background="@drawable/app_bg_land1"
     android:backgroundTint="#2B2D2F"
-    android:backgroundTintMode="screen">
+    android:backgroundTintMode="multiply">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/capriola"
             android:text="Hello"
-            android:textColor="@color/navyBlue"
+            android:textColor="@color/colorPrimary"
             android:textSize="40sp"
             android:textStyle="normal" />
 
@@ -32,7 +32,7 @@
             android:layout_marginTop="55dp"
             android:fontFamily="@font/capriola"
             android:text="You are currently"
-            android:textColor="@color/navyBlue"
+            android:textColor="@color/colorPrimary"
             android:textSize="18sp"
             android:textStyle="normal" />
 
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/capriola"
                     android:text="In a meeting"
-                    android:textColor="@color/navyBlue"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="24sp"
                     android:layout_margin="10dp"/>
 
@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/capriola"
                     android:text="In a game"
-                    android:textColor="@color/navyBlue"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="24sp"
                     android:layout_margin="10dp"/>
 
@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/capriola"
                     android:text="In a work"
-                    android:textColor="@color/navyBlue"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="24sp"
                     android:layout_margin="10dp"/>
 
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/capriola"
                     android:text="Driving"
-                    android:textColor="@color/navyBlue"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="24sp"
                     android:layout_margin="10dp"/>
 
@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/capriola"
                     android:text="Sleeping"
-                    android:textColor="@color/navyBlue"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="24sp"
                     android:layout_margin="10dp"/>
 
@@ -102,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/capriola"
                     android:text="Available"
-                    android:textColor="@color/navyBlue"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="24sp"
                     android:layout_margin="10dp"/>
             </RadioGroup>
@@ -117,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Status : "
-                android:textColor="@color/navyBlue"
+                android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -126,7 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Available"
-                android:textColor="@color/navyBlue"
+                android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -141,7 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Message : "
-                android:textColor="@color/navyBlue"
+                android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -150,7 +150,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Message to be send"
-                android:textColor="@color/navyBlue"
+                android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>

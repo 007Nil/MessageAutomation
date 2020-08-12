@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.MainActivity"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/app_bg_land1"
+    android:backgroundTint="#2B2D2F"
+    android:backgroundTintMode="multiply">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/capriola"
+        android:text="Welcome"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        android:fontFamily="@font/capriola"
+        android:text="Before getting started please enter your details"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        android:textStyle="normal" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/capriola"
+        android:hint="Enter your name here"
+        android:inputType="textPersonName"
+        android:textSize="24sp"
+        android:textColor="@color/colorPrimary"/>
+
+    <Button
+        android:id="@+id/submit"
+        android:src="@drawable/button_round_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorAccent"
+        android:fontFamily="@font/capriola"
+        android:text="Submit"
+        android:textSize="18sp"
+        android:textColor="@color/white"/>
+
+</LinearLayout>

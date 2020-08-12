@@ -24,8 +24,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/messageautomation/Activity/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/messageautomation/Activity/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/messageautomation/Activity/MainActivity2.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/messageautomation/Activity/MainActivity2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout-xxhdpi/activity_main2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout-xxhdpi/activity_main2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +31,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3_XL_API_30" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="RZ8M547NNKJ" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -85,6 +83,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$PROJECT_DIR$/../Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="RecentsManager">
@@ -198,24 +197,28 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="302" y="155" width="824" height="491" key="AndroidCreateResourceFileDialog/72.27.1294.741/1366.0.1366.768@72.27.1294.741" timestamp="1597165310035" />
-    <state width="1248" height="159" key="GridCell.Tab.0.bottom" timestamp="1597180487649">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state width="1238" height="212" key="GridCell.Tab.0.bottom" timestamp="1597203690315">
+      <screen x="0" y="0" width="1280" height="800" />
     </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1597203690315" />
     <state width="1320" height="181" key="GridCell.Tab.0.bottom/72.27.1294.741/1366.0.1366.768@1366.0.1366.768" timestamp="1597130556865" />
     <state width="1248" height="159" key="GridCell.Tab.0.bottom/72.27.1294.741/1366.0.1366.768@72.27.1294.741" timestamp="1597180487649" />
-    <state width="1248" height="159" key="GridCell.Tab.0.center" timestamp="1597180487649">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state width="1238" height="212" key="GridCell.Tab.0.center" timestamp="1597203690313">
+      <screen x="0" y="0" width="1280" height="800" />
     </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1597203690313" />
     <state width="1320" height="181" key="GridCell.Tab.0.center/72.27.1294.741/1366.0.1366.768@1366.0.1366.768" timestamp="1597130556865" />
     <state width="1248" height="159" key="GridCell.Tab.0.center/72.27.1294.741/1366.0.1366.768@72.27.1294.741" timestamp="1597180487649" />
-    <state width="1248" height="159" key="GridCell.Tab.0.left" timestamp="1597180487649">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state width="1238" height="212" key="GridCell.Tab.0.left" timestamp="1597203690312">
+      <screen x="0" y="0" width="1280" height="800" />
     </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1597203690312" />
     <state width="1320" height="181" key="GridCell.Tab.0.left/72.27.1294.741/1366.0.1366.768@1366.0.1366.768" timestamp="1597130556865" />
     <state width="1248" height="159" key="GridCell.Tab.0.left/72.27.1294.741/1366.0.1366.768@72.27.1294.741" timestamp="1597180487649" />
-    <state width="1248" height="159" key="GridCell.Tab.0.right" timestamp="1597180487649">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state width="1238" height="212" key="GridCell.Tab.0.right" timestamp="1597203690314">
+      <screen x="0" y="0" width="1280" height="800" />
     </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1597203690314" />
     <state width="1320" height="181" key="GridCell.Tab.0.right/72.27.1294.741/1366.0.1366.768@1366.0.1366.768" timestamp="1597130556865" />
     <state width="1248" height="159" key="GridCell.Tab.0.right/72.27.1294.741/1366.0.1366.768@72.27.1294.741" timestamp="1597180487649" />
     <state x="302" y="143" width="824" height="515" key="IDE.errors.dialog" timestamp="1597132581781">

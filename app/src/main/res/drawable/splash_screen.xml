@@ -2,10 +2,15 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:opacity="opaque">
 
-    <item android:drawable="@color/colorPrimary"/>
-    <item>
+    <item
+        android:drawable="@color/colorPrimary"
+        android:backgroundTint="#2B2D2F"
+        android:backgroundTintMode="multiply"/>
+    <item android:drawable="@drawable/ic_splashlogo"
+        android:gravity="center"/>
+    <item android:bottom="50dp">
         <bitmap
-            android:gravity="center"
-            android:src="@drawable/logo_full"/>
+            android:src="@drawable/nametxt"
+            android:gravity="bottom"/>
     </item>
 </layer-list>
