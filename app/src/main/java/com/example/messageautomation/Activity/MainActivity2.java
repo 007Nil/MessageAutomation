@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -39,10 +40,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import static com.example.messageautomation.App.CHANNEL_ID;
+
 public class MainActivity2 extends AppCompatActivity {
 
     private static final String SHARED_PREFS = "sharedPrefs";
-    private NotificationCompat.Builder builder;
+    private NotificationManagerCompat notificationManagerCompat;
 
     public static void saveData(Context context,String key,String text) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -61,7 +64,7 @@ public class MainActivity2 extends AppCompatActivity {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         String text = sharedPreferences.getString("message", "Sorry the owner isn't available." +
                 " Will get back to you as soon as available." +
-                "\n\nThis message is auto-generated from Message Automation.");
+                "\n\nMessage auto-sent from Message Automation.");
         return text;
     }
 
@@ -69,8 +72,6 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-
-
 
         String username="",state="",messageStored="";
         final TextView labelEdit,status,message;
@@ -142,8 +143,10 @@ public class MainActivity2 extends AppCompatActivity {
                     saveData(MainActivity2.this,"state","meeting");
                     status.setText("In a meeting");
                     message.setText("Hi there, " + finalUsername + " is attending a meeting at the current moment. Will get back to you when available." +
-                            "\n\nThis message is auto-generated from Message Automation.");
+                            "\n\nMessage auto-sent from Message Automation.");
                     saveData(MainActivity2.this,"message",message.getText().toString());
+
+                    createNotification(MainActivity2.this,status.getText().toString());
                 }else if(i == R.id.game){
                     AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
@@ -151,8 +154,10 @@ public class MainActivity2 extends AppCompatActivity {
                     saveData(MainActivity2.this,"state","game");
                     status.setText("In a game");
                     message.setText("Hi there, " + finalUsername + " is gaming at the current moment. Will get back to you when available." +
-                            "\n\nThis message is auto-generated from Message Automation.");
+                            "\n\nMessage auto-sent from Message Automation.");
                     saveData(MainActivity2.this,"message",message.getText().toString());
+
+                    createNotification(MainActivity2.this,status.getText().toString());
                 }else if(i == R.id.work){
                     AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
@@ -160,8 +165,10 @@ public class MainActivity2 extends AppCompatActivity {
                     saveData(MainActivity2.this,"state","work");
                     status.setText("In a work");
                     message.setText("Hi there, " + finalUsername + " is working at the current moment. Will get back to you when available." +
-                            "\n\nThis message is auto-generated from Message Automation.");
+                            "\n\nMessage auto-sent from Message Automation.");
                     saveData(MainActivity2.this,"message",message.getText().toString());
+
+                    createNotification(MainActivity2.this,status.getText().toString());
                 }else if(i == R.id.awayFromPhone){
                     AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
@@ -169,8 +176,10 @@ public class MainActivity2 extends AppCompatActivity {
                     saveData(MainActivity2.this,"state","awayFromPhone");
                     status.setText("Driving");
                     message.setText("Hi there, " + finalUsername + " is driving at the current moment. Will get back to you when available." +
-                            "\n\nThis message is auto-generated from Message Automation.");
+                            "\n\nMessage auto-sent from Message Automation.");
                     saveData(MainActivity2.this,"message",message.getText().toString());
+
+                    createNotification(MainActivity2.this,status.getText().toString());
                 }else if(i == R.id.sleep){
                     AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
@@ -178,8 +187,10 @@ public class MainActivity2 extends AppCompatActivity {
                     saveData(MainActivity2.this,"state","sleep");
                     status.setText("Sleeping");
                     message.setText("Hi there, " + finalUsername + " is sleeping at the current moment. Will get back to you when available." +
-                            "\n\nThis message is auto-generated from Message Automation.");
+                            "\n\nMessage auto-sent from Message Automation.");
                     saveData(MainActivity2.this,"message",message.getText().toString());
+
+                    createNotification(MainActivity2.this,status.getText().toString());
                 }else if(i == R.id.available){
 
                     AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
@@ -192,11 +203,39 @@ public class MainActivity2 extends AppCompatActivity {
                     status.setText("Available");
                     message.setText("Sorry the owner isn't available." +
                             " Will get back to you as soon as available." +
-                            "\n\nThis message is auto-generated from Message Automation.");
+                            "\n\nMessage auto-sent from Message Automation.");
                     saveData(MainActivity2.this,"message",message.getText().toString());
+
+                    deleteNotification();
                 }
             }
         });
+    }
+
+    private void deleteNotification() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.cancel(1);
+        }
+    }
+
+    private void createNotification(Context context, String status) {
+        //Notification Code here
+        Intent activityIntent =  new Intent(context,MainActivity2.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(context,0,activityIntent,0);
+
+        notificationManagerCompat = NotificationManagerCompat.from(MainActivity2.this);
+        Notification notification = new NotificationCompat.Builder(MainActivity2.this,CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_baseline_sms_24)
+                .setContentTitle("Message Automation")
+                .setContentText("Status : "+status)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .setCategory(NotificationCompat.CATEGORY_STATUS)
+                .setOngoing(true)
+                .setContentIntent(contentIntent)
+                .build();
+
+        notificationManagerCompat.notify(1,notification);
     }
 
     @Override
