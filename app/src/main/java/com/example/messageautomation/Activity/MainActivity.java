@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
                             if(sendMessageAvailable.isChecked()){
                                 PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putBoolean("sendMessageAvailable",true).apply();
+                                sharedPreferencesCustom.saveData(MainActivity.this,"sendMessageAvailable",true);
                             }else{
                                 PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putBoolean("sendMessageAvailable",false).apply();
                             }
@@ -110,8 +111,11 @@ public class MainActivity extends AppCompatActivity {
                             PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putString("sim","sim2").apply();
 
                             if(sendMessageAvailable.isChecked()){
+                                System.out.println("MSG CHECK");
                                 PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putBoolean("sendMessageAvailable",true).apply();
+                                sharedPreferencesCustom.saveData(MainActivity.this,"sendMessageAvailable",true);
                             }else{
+                                System.out.println("MSG NOT CHECK");
                                 PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putBoolean("sendMessageAvailable",false).apply();
                             }
 
