@@ -18,7 +18,10 @@
         android:roundIcon="@drawable/ic_applogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.MainActivity3" android:parentActivityName=".Activity.MainActivity2"></activity>
+        <activity android:name=".Activity.MainActivity4" android:parentActivityName=".Activity.MainActivity2"></activity>
+        <activity
+            android:name=".Activity.MainActivity3"
+            android:parentActivityName=".Activity.MainActivity2" />
         <activity
             android:name=".Activity.MainActivity2"
             tools:ignore="MissingClass" />

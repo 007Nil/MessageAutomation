@@ -7,7 +7,7 @@
         app:showAsAction="collapseActionView"/>
     <item android:id="@+id/about"
         android:icon="@drawable/ic_baseline_info_24"
-        android:title="About"
+        android:title="Details"
         app:showAsAction="collapseActionView"/>
     <item android:id="@+id/checkForUpdate"
         android:title="Check for updates"

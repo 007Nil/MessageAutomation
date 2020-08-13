@@ -52,6 +52,7 @@ public class MainActivity2 extends AppCompatActivity {
     private TextView labelEdit,status,message;
     private RadioButton meeting,game,work,awayFromPhone,sleep,available;
     private RadioGroup stateGroup;
+    private Intent changeActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -287,13 +288,13 @@ public class MainActivity2 extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.setting:
-                Intent changeActivity = new Intent(MainActivity2.this,MainActivity3.class);
+                changeActivity = new Intent(MainActivity2.this,MainActivity3.class);
                 startActivity(changeActivity);
                 return true;
 
             case R.id.about:
-                Toast.makeText(MainActivity2.this,"App developed by Rounak and Sagnik" +
-                        "\n\nCredits Page yet to be implemented!",Toast.LENGTH_LONG).show();
+                changeActivity = new Intent(MainActivity2.this,MainActivity4.class);
+                startActivity(changeActivity);
                 return true;
 
             case R.id.checkForUpdate:
