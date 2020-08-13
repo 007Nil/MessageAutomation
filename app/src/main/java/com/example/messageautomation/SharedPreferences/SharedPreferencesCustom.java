@@ -48,8 +48,8 @@ public class SharedPreferencesCustom extends AppCompatActivity {
         return sharedPreferences.getBoolean("sendMessageAvailable",false);
     }
 
-    public boolean loadSendMessageAvailable(){
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
-        return sharedPreferences.getBoolean("sendMessageAvailable",false);
-    }
+//    public boolean loadSendMessageAvailable(){
+//        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
+//        return sharedPreferences.getBoolean("sendMessageAvailable",false);
+//    }
 }
