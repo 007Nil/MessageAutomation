@@ -26,6 +26,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.messageautomation.R;
+import com.example.messageautomation.SharedPreferences.SharedPreferencesCustom;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -33,6 +34,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_CODE = 1;
+    private SharedPreferencesCustom sharedPreferencesCustom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         if (!sharedPreferences.getBoolean("Seen", false)) {
             setContentView(R.layout.activity_main);
             final EditText username;
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
             username = findViewById(R.id.username);
             submit = findViewById(R.id.submit);
+            System.out.println(username.toString());
 
             sim1 = findViewById(R.id.sim1);
             sim2 = findViewById(R.id.sim2);
@@ -83,9 +86,11 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if (!username.getText().toString().isEmpty()) {
+                        sharedPreferencesCustom = new SharedPreferencesCustom();
                         SharedPreferences.Editor sPE = PreferenceManager.getDefaultSharedPreferences(getBaseContext()).edit();
                         sPE.putBoolean("Seen", true);
                         sPE.apply();
+                        sharedPreferencesCustom.saveData(MainActivity.this,"username",username.getText().toString());
 
                         if(sim1.isChecked()){
                             PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putString("sim","sim1").apply();
