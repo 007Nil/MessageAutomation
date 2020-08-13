@@ -273,9 +273,11 @@ public class MainActivity2 extends AppCompatActivity {
                 .setOngoing(true)
                 .setContentIntent(contentIntent)
                 .build();
-
         notificationManagerCompat.notify(1,notification);
     }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
