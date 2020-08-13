@@ -19,7 +19,6 @@ public class PhoneStateReceiver extends BroadcastReceiver {
     private SendMessage sendMessage = new SendMessage();
     private static boolean callRinging=false;
     private static boolean callReceived =false;
-    private String state;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -45,7 +44,9 @@ public class PhoneStateReceiver extends BroadcastReceiver {
                 currentState = sharedPreferencesCustom.loadData(context);
                 message = sharedPreferencesCustom.loadMsg(context);
                 if(callRinging && !callReceived && currentState.equals("available")){
-                    sendMessage.sendSMS(incomingNumber,message,context);
+                    if(sharedPreferencesCustom.loadSendMessageAvailable()){
+                        sendMessage.sendSMS(incomingNumber,message,context);
+                    }
                 }else if(callRinging && callReceived && !currentState.equals("available")){
                     Toast.makeText(context,"Since you received the call message will not be sent",Toast.LENGTH_LONG).show();
                 }else if(callRinging && !callReceived){

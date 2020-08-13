@@ -25,6 +25,7 @@ import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -34,6 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.messageautomation.R;
+import com.example.messageautomation.SharedPreferences.SharedPreferencesCustom;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -44,39 +46,17 @@ import static com.example.messageautomation.App.CHANNEL_ID;
 
 public class MainActivity2 extends AppCompatActivity {
 
-    private static final String SHARED_PREFS = "sharedPrefs";
     private NotificationManagerCompat notificationManagerCompat;
-
-    public static void saveData(Context context,String key,String text) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(key, text);
-        editor.apply();
-    }
-
-    public static String loadData(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        String text = sharedPreferences.getString("state", "available");
-        return text;
-    }
-
-    public static String loadMsg(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        String text = sharedPreferences.getString("message", "Sorry the owner isn't available." +
-                " Will get back to you as soon as available." +
-                "\n\nMessage auto-sent from Message Automation.");
-        return text;
-    }
+    private SharedPreferencesCustom sharedPreferencesCustom;
+    private String username="",state="",messageStored="";
+    private TextView labelEdit,status,message;
+    private RadioButton meeting,game,work,awayFromPhone,sleep,available;
+    private RadioGroup stateGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-
-        String username="",state="",messageStored="";
-        final TextView labelEdit,status,message;
-        RadioButton meeting,game,work,awayFromPhone,sleep,available;
-        RadioGroup stateGroup;
 
         labelEdit = findViewById(R.id.labelEdit);
         meeting = findViewById(R.id.meeting);
@@ -89,21 +69,135 @@ public class MainActivity2 extends AppCompatActivity {
         status = findViewById(R.id.status);
         message = findViewById(R.id.message);
 
-        username = PreferenceManager.getDefaultSharedPreferences(MainActivity2.this).getString("username","");
+        sharedPreferencesCustom = new SharedPreferencesCustom();
 
-        Date time = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("HHmm");
-        String currentTime = dateFormat.format(time);
-        if(Integer.parseInt(currentTime) >= 0600 && Integer.parseInt(currentTime) <1200){
-            labelEdit.setText("Good Morning\n"+username);
-        }else if(Integer.parseInt(currentTime) >= 1200 && Integer.parseInt(currentTime) <1600){
-            labelEdit.setText("Good Afternoon\n"+username);
-        }else{
-            labelEdit.setText("Good Evening\n"+username);
+        //setup the username
+        setUser();
+
+        //setup the mode
+        initData();
+
+        stateGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if(i == R.id.meeting){
+                    //saving state in sharedPreference
+                    sharedPreferencesCustom.saveData(MainActivity2.this,"state","meeting");
+                    //set data to layout
+                    setData("meeting");
+                    //save the message in sharedPreference
+                    sharedPreferencesCustom.saveData(MainActivity2.this,"message",message.getText().toString());
+                    //show notification
+                    createNotification(MainActivity2.this,status.getText().toString());
+                    // modify the audio
+                    setAudioTo(status.getText().toString());
+                }else if(i == R.id.game){
+                    sharedPreferencesCustom.saveData(MainActivity2.this,"state","game");
+                    setData("game");
+                    sharedPreferencesCustom.saveData(MainActivity2.this,"message",message.getText().toString());
+                    createNotification(MainActivity2.this,status.getText().toString());
+                    setAudioTo(status.getText().toString());
+                }else if(i == R.id.work){
+                    sharedPreferencesCustom.saveData(MainActivity2.this,"state","work");
+                    setData("work");
+                    sharedPreferencesCustom.saveData(MainActivity2.this,"message",message.getText().toString());
+                    createNotification(MainActivity2.this,status.getText().toString());
+                    setAudioTo(status.getText().toString());
+                }else if(i == R.id.awayFromPhone){
+                    sharedPreferencesCustom.saveData(MainActivity2.this,"state","driving");
+                    setData("driving");
+                    sharedPreferencesCustom.saveData(MainActivity2.this,"message",message.getText().toString());
+                    createNotification(MainActivity2.this,status.getText().toString());
+                    setAudioTo(status.getText().toString());
+                }else if(i == R.id.sleep){
+                    sharedPreferencesCustom.saveData(MainActivity2.this,"state","sleep");
+                    setData("sleep");
+                    sharedPreferencesCustom.saveData(MainActivity2.this,"message",message.getText().toString());
+                    createNotification(MainActivity2.this,status.getText().toString());
+                    setAudioTo(status.getText().toString());
+                }else if(i == R.id.available){
+                    //checking user opt for available message or not
+                    if(sharedPreferencesCustom.loadSendMessageAvailable(MainActivity2.this)){
+                        sharedPreferencesCustom.saveData(MainActivity2.this,"state","available");
+                        setData("available");
+                        sharedPreferencesCustom.saveData(MainActivity2.this,"message",message.getText().toString());
+                        //remove notification
+                        deleteNotification();
+                        setAudioTo(status.getText().toString());
+                    }else{
+                        sharedPreferencesCustom.saveData(MainActivity2.this,"state","available");
+                        setData("available");
+                        //remove notification
+                        deleteNotification();
+                        setAudioTo(status.getText().toString());
+                    }
+                }
+            }
+        });
+    }
+
+    private void setData(String string) {
+        switch (string) {
+            case "meeting":
+                status.setText("In a meeting");
+                message.setText("Hi there, " + username + " is attending a meeting at the current moment." +
+                        " Will get back to you when available." +
+                        "\n\nMessage auto-sent from Message Automation.");
+                break;
+            case "game":
+                status.setText("In a game");
+                message.setText("Hi there, " + username + " is gaming at the current moment." +
+                        " Will get back to you when available." +
+                        "\n\nMessage auto-sent from Message Automation.");
+                break;
+            case "work":
+                status.setText("In a work");
+                message.setText("Hi there, " + username + " is working at the current moment." +
+                        " Will get back to you when available." +
+                        "\n\nMessage auto-sent from Message Automation.");
+                break;
+            case "driving":
+                status.setText("Driving");
+                message.setText("Hi there, " + username + " is driving at the current moment." +
+                        " Will get back to you when available." +
+                        "\n\nMessage auto-sent from Message Automation.");
+                break;
+            case "sleep":
+                status.setText("Sleeping");
+                message.setText("Hi there, " + username + " is sleeping at the current moment." +
+                        " Will get back to you when available." +
+                        "\n\nMessage auto-sent from Message Automation.");
+                break;
+            case "available":
+                status.setText("Available");
+                if(sharedPreferencesCustom.loadSendMessageAvailable(MainActivity2.this)){
+                    message.setText("Sorry the owner isn't available." +
+                            " Will get back to you as soon as available." +
+                            "\n\nMessage auto-sent from Message Automation.");
+                }else{
+                    message.setText("No message will be send");
+                }
+
+                break;
         }
+    }
 
-        state = loadData(MainActivity2.this);
-        messageStored = loadMsg(MainActivity2.this);
+    private void setAudioTo(String string) {
+        if(!string.equalsIgnoreCase("available")){
+            AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
+            audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+        }else{
+            AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
+            int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_RING);
+
+            audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+            audioManager.setStreamVolume(AudioManager.STREAM_RING, maxVolume, AudioManager.FLAG_SHOW_UI + AudioManager.FLAG_PLAY_SOUND);
+        }
+    }
+
+    private void initData() {
+        state = sharedPreferencesCustom.loadData(MainActivity2.this);
+        messageStored = sharedPreferencesCustom.loadMsg(MainActivity2.this);
 
         if(state.contains("meeting")){
             meeting.setChecked(true);
@@ -117,7 +211,7 @@ public class MainActivity2 extends AppCompatActivity {
             work.setChecked(true);
             status.setText("In a work");
             message.setText(messageStored);
-        }else if(state.contains("awayFromPhone")){
+        }else if(state.contains("driving")){
             awayFromPhone.setChecked(true);
             status.setText("Driving");
             message.setText(messageStored);
@@ -128,88 +222,30 @@ public class MainActivity2 extends AppCompatActivity {
         }else if(state.contains("available")){
             available.setChecked(true);
             status.setText("Available");
-            message.setText(messageStored);
-        }
-
-        final String finalUsername = username;
-
-        stateGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if(i == R.id.meeting){
-                    AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
-                    audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-
-                    saveData(MainActivity2.this,"state","meeting");
-                    status.setText("In a meeting");
-                    message.setText("Hi there, " + finalUsername + " is attending a meeting at the current moment. Will get back to you when available." +
-                            "\n\nMessage auto-sent from Message Automation.");
-                    saveData(MainActivity2.this,"message",message.getText().toString());
-
-                    createNotification(MainActivity2.this,status.getText().toString());
-                }else if(i == R.id.game){
-                    AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
-                    audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-
-                    saveData(MainActivity2.this,"state","game");
-                    status.setText("In a game");
-                    message.setText("Hi there, " + finalUsername + " is gaming at the current moment. Will get back to you when available." +
-                            "\n\nMessage auto-sent from Message Automation.");
-                    saveData(MainActivity2.this,"message",message.getText().toString());
-
-                    createNotification(MainActivity2.this,status.getText().toString());
-                }else if(i == R.id.work){
-                    AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
-                    audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-
-                    saveData(MainActivity2.this,"state","work");
-                    status.setText("In a work");
-                    message.setText("Hi there, " + finalUsername + " is working at the current moment. Will get back to you when available." +
-                            "\n\nMessage auto-sent from Message Automation.");
-                    saveData(MainActivity2.this,"message",message.getText().toString());
-
-                    createNotification(MainActivity2.this,status.getText().toString());
-                }else if(i == R.id.awayFromPhone){
-                    AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
-                    audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-
-                    saveData(MainActivity2.this,"state","awayFromPhone");
-                    status.setText("Driving");
-                    message.setText("Hi there, " + finalUsername + " is driving at the current moment. Will get back to you when available." +
-                            "\n\nMessage auto-sent from Message Automation.");
-                    saveData(MainActivity2.this,"message",message.getText().toString());
-
-                    createNotification(MainActivity2.this,status.getText().toString());
-                }else if(i == R.id.sleep){
-                    AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
-                    audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-
-                    saveData(MainActivity2.this,"state","sleep");
-                    status.setText("Sleeping");
-                    message.setText("Hi there, " + finalUsername + " is sleeping at the current moment. Will get back to you when available." +
-                            "\n\nMessage auto-sent from Message Automation.");
-                    saveData(MainActivity2.this,"message",message.getText().toString());
-
-                    createNotification(MainActivity2.this,status.getText().toString());
-                }else if(i == R.id.available){
-
-                    AudioManager audioManager = (AudioManager)MainActivity2.this.getSystemService(Context.AUDIO_SERVICE);
-                    int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_RING);
-
-                    audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-                    audioManager.setStreamVolume(AudioManager.STREAM_RING, maxVolume, AudioManager.FLAG_SHOW_UI + AudioManager.FLAG_PLAY_SOUND);
-
-                    saveData(MainActivity2.this,"state","available");
-                    status.setText("Available");
-                    message.setText("Sorry the owner isn't available." +
-                            " Will get back to you as soon as available." +
-                            "\n\nMessage auto-sent from Message Automation.");
-                    saveData(MainActivity2.this,"message",message.getText().toString());
-
-                    deleteNotification();
-                }
+            if(sharedPreferencesCustom.loadSendMessageAvailable(MainActivity2.this)){
+                message.setText("Sorry the owner isn't available." +
+                        " Will get back to you as soon as available." +
+                        "\n\nMessage auto-sent from Message Automation.");
+            }else{
+                message.setText("No message will be send");
+                //sharedPreferencesCustom.saveData(MainActivity2.this,"message",message.getText().toString());
             }
-        });
+        }
+    }
+
+    private void setUser() {
+        username = sharedPreferencesCustom.loadUsername(MainActivity2.this);
+
+        Date time = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("HHmm");
+        String currentTime = dateFormat.format(time);
+        if(Integer.parseInt(currentTime) >= 0600 && Integer.parseInt(currentTime) <1200){
+            labelEdit.setText("Good Morning\n"+username);
+        }else if(Integer.parseInt(currentTime) >= 1200 && Integer.parseInt(currentTime) <1600){
+            labelEdit.setText("Good Afternoon\n"+username);
+        }else{
+            labelEdit.setText("Good Evening\n"+username);
+        }
     }
 
     private void deleteNotification() {
@@ -249,38 +285,8 @@ public class MainActivity2 extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.setting:
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity2.this);
-                builder.setTitle("Change Username");
-                final EditText input = new EditText(MainActivity2.this);
-                final TextView label = new TextView(MainActivity2.this);
-                label.setText("Enter new name");
-                label.setTextSize(20);
-                label.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-                input.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
-                LinearLayout layout = new LinearLayout(this);
-                layout.setOrientation(LinearLayout.VERTICAL);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                params.setMargins(50, 30, 50, 0);
-                layout.addView(label,params);
-                layout.addView(input,params);
-                builder.setView(layout);
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        PreferenceManager.getDefaultSharedPreferences(MainActivity2.this).edit().putString("username", input.getText().toString()).apply();
-                        finish();
-                        startActivity(getIntent());
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
-                    }
-                });
-                builder.setCancelable(false);
-                builder.show();
+                Intent changeActivity = new Intent(MainActivity2.this,MainActivity3.class);
+                startActivity(changeActivity);
                 return true;
 
             case R.id.about:
@@ -288,8 +294,19 @@ public class MainActivity2 extends AppCompatActivity {
                         "\n\nCredits Page yet to be implemented!",Toast.LENGTH_LONG).show();
                 return true;
 
+            case R.id.checkForUpdate:
+                Toast.makeText(MainActivity2.this,"Updater to be implemented",Toast.LENGTH_LONG).show();
+
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        setUser();
+        initData();
     }
 }

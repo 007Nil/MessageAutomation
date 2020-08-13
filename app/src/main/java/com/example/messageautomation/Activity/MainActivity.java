@@ -15,7 +15,9 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -65,9 +67,17 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.activity_main);
             final EditText username;
             Button submit;
+            final RadioButton sim1,sim2;
+            final CheckBox sendMessageAvailable;
 
             username = findViewById(R.id.username);
             submit = findViewById(R.id.submit);
+
+            sim1 = findViewById(R.id.sim1);
+            sim2 = findViewById(R.id.sim2);
+
+            sendMessageAvailable = findViewById(R.id.sendMessageAvailable);
+            //sim1.setChecked(true);
 
             submit.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -77,10 +87,37 @@ public class MainActivity extends AppCompatActivity {
                         sPE.putBoolean("Seen", true);
                         sPE.apply();
 
-                        Intent changeActivity = new Intent(MainActivity.this, MainActivity2.class);
-                        PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putString("username", username.getText().toString()).apply();
-                        startActivity(changeActivity);
-                        finish();
+                        if(sim1.isChecked()){
+                            PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putString("sim","sim1").apply();
+
+                            if(sendMessageAvailable.isChecked()){
+                                PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putBoolean("sendMessageAvailable",true).apply();
+                            }else{
+                                PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putBoolean("sendMessageAvailable",false).apply();
+                            }
+
+                            Intent changeActivity = new Intent(MainActivity.this, MainActivity2.class);
+                            PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putString("username", username.getText().toString()).apply();
+                            startActivity(changeActivity);
+                            finish();
+
+                        }else if(sim2.isChecked()){
+                            PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putString("sim","sim2").apply();
+
+                            if(sendMessageAvailable.isChecked()){
+                                PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putBoolean("sendMessageAvailable",true).apply();
+                            }else{
+                                PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putBoolean("sendMessageAvailable",false).apply();
+                            }
+
+                            Intent changeActivity = new Intent(MainActivity.this, MainActivity2.class);
+                            PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putString("username", username.getText().toString()).apply();
+                            startActivity(changeActivity);
+                            finish();
+                        }else{
+                            Toast.makeText(MainActivity.this,"Please select a sim",Toast.LENGTH_LONG).show();
+                        }
+
                     } else {
                         Toast.makeText(MainActivity.this, "Please enter your name to continue", Toast.LENGTH_LONG).show();
                     }
