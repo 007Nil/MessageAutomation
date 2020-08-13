@@ -127,6 +127,7 @@ public class MainActivity2 extends AppCompatActivity {
                     }else{
                         sharedPreferencesCustom.saveData(MainActivity2.this,"state","available");
                         setData("available");
+                        sharedPreferencesCustom.saveData(MainActivity2.this,"message",message.getText().toString());
                         //remove notification
                         deleteNotification();
                         setAudioTo(status.getText().toString());
@@ -171,7 +172,7 @@ public class MainActivity2 extends AppCompatActivity {
             case "available":
                 status.setText("Available");
                 if(sharedPreferencesCustom.loadSendMessageAvailable(MainActivity2.this)){
-                    message.setText("Sorry the owner isn't available." +
+                    message.setText("Sorry " + username + " isn't available." +
                             " Will get back to you as soon as available." +
                             "\n\nMessage auto-sent from Message Automation.");
                 }else{
@@ -223,12 +224,13 @@ public class MainActivity2 extends AppCompatActivity {
             available.setChecked(true);
             status.setText("Available");
             if(sharedPreferencesCustom.loadSendMessageAvailable(MainActivity2.this)){
-                message.setText("Sorry the owner isn't available." +
+                message.setText("Sorry " + username + " isn't available." +
                         " Will get back to you as soon as available." +
                         "\n\nMessage auto-sent from Message Automation.");
+                sharedPreferencesCustom.saveData(MainActivity2.this,"message",message.getText().toString());
             }else{
                 message.setText("No message will be send");
-                //sharedPreferencesCustom.saveData(MainActivity2.this,"message",message.getText().toString());
+                sharedPreferencesCustom.saveData(MainActivity2.this,"message",message.getText().toString());
             }
         }
     }

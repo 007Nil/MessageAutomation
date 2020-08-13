@@ -44,8 +44,10 @@ public class PhoneStateReceiver extends BroadcastReceiver {
                 currentState = sharedPreferencesCustom.loadData(context);
                 message = sharedPreferencesCustom.loadMsg(context);
                 if(callRinging && !callReceived && currentState.equals("available")){
-                    if(sharedPreferencesCustom.loadSendMessageAvailable()){
+                    if(sharedPreferencesCustom.loadSendMessageAvailable(context)){
                         sendMessage.sendSMS(incomingNumber,message,context);
+                    }else{
+                        Toast.makeText(context,"No message is sent",Toast.LENGTH_LONG).show();
                     }
                 }else if(callRinging && callReceived && !currentState.equals("available")){
                     Toast.makeText(context,"Since you received the call message will not be sent",Toast.LENGTH_LONG).show();

@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/capriola"
             android:padding="30dp"
-            android:text="Send message when mode set to Available"
+            android:text="Send an away from phone message when mode is set to available"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp" />
 
