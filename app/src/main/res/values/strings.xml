@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Message Automation</string>
+    <string name="app_info">Message Automation is an application build for automatically sending
+    a sms based on the mode set. It will basically look for an incoming call and will auto send
+    a sms to the incoming number.</string>
+    <string name="privacy">We are very concern about the privacy of our users. We would like to
+    inform all our users that this app do not store any kind of sensitive data of our users except
+        the details that given by our users for the app to function well.
+    \n\nThe purpose of each permission is given below :
+        \n\n\u2022 <b>Phone</b> : To detect any incoming calls in the device
+        \n\n\u2022 <b>Call logs</b> : To detect the incoming call\'s phone number
+        \n\n\u2022 <b>SMS</b> : To send sms to the caller of incoming call
+        \n\n\u2022 <b>Do not disturb</b> : To manage device audio state</string>
+    <string name="developerRounak">
+        <b>Rounak Roy</b>
+        \nAndroid Developer and UI Designer
+        \nStudent at Siliguri Institute of Technology
+        \n(Bachelor of Computer Applications)
+        \nEmail : rounakroy.slg@gmail.com
+    </string>
+    <string name="developerSagnik">
+        <b>Sagnik Sarkar</b>
+        \nCloud Administrator and Java Developer
+        \nStudent at Siliguri Institute of Technology
+        \n(Master of Computer Applications)
+        \nEmail : sagniksarkar@ymail.com
+    </string>
+</resources>
