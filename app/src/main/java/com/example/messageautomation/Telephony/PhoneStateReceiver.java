@@ -1,8 +1,10 @@
 package com.example.messageautomation.Telephony;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
@@ -46,6 +48,21 @@ public class PhoneStateReceiver extends BroadcastReceiver {
                 if(callRinging && !callReceived && currentState.equals("available")){
                     if(sharedPreferencesCustom.loadSendMessageAvailable(context)){
                         sendMessage.sendSMS(incomingNumber,message,context);
+                        switch (getResultCode()){
+                            case Activity.RESULT_OK:
+                                Toast.makeText(context, "Message Sent",Toast.LENGTH_LONG).show();
+                                break;
+
+                            case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
+                                Toast.makeText(context,"Failed to send message",Toast.LENGTH_LONG).show();
+                                break;
+
+                            case SmsManager.RESULT_ERROR_NO_SERVICE:
+                                Toast.makeText(context,"No service available",Toast.LENGTH_LONG).show();
+                                break;
+                            default:
+                                Toast.makeText(context,"Error! No message is sent",Toast.LENGTH_LONG).show();
+                        }
                     }else{
                         Toast.makeText(context,"No message is sent",Toast.LENGTH_LONG).show();
                     }
@@ -53,6 +70,23 @@ public class PhoneStateReceiver extends BroadcastReceiver {
                     Toast.makeText(context,"Since you received the call message will not be sent",Toast.LENGTH_LONG).show();
                 }else if(callRinging && !callReceived){
                     sendMessage.sendSMS(incomingNumber,message,context);
+                    switch (getResultCode()){
+                        case Activity.RESULT_OK:
+                            Toast.makeText(context, "Message Sent",Toast.LENGTH_LONG).show();
+                            break;
+
+                        case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
+                            Toast.makeText(context,"Failed to send message",Toast.LENGTH_LONG).show();
+                            break;
+
+                        case SmsManager.RESULT_ERROR_NO_SERVICE:
+                            Toast.makeText(context,"No service available",Toast.LENGTH_LONG).show();
+                            break;
+
+                        default:
+                            Toast.makeText(context,"Error! No message is sent",Toast.LENGTH_LONG).show();
+                    }
+
                 }
                 callRinging = false;
                 callReceived = false;

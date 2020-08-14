@@ -5,24 +5,41 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.text.InputType;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.messageautomation.R;
 import com.example.messageautomation.SharedPreferences.SharedPreferencesCustom;
+
+import java.util.List;
 
 public class MainActivity3 extends AppCompatActivity {
     private TextView setting1;
     private SwitchCompat setting2;
     private SharedPreferencesCustom sharedPreferencesCustom;
     private boolean sendMessageAvailable;
+    private RadioGroup simRadioGroup;
+    private RadioButton sim1,sim2;
+    private String simName1;
+    private String simName2;
+    private boolean dualSim=true;
+    private String sim;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +48,9 @@ public class MainActivity3 extends AppCompatActivity {
 
         setting1 = findViewById(R.id.setting1);
         setting2 = findViewById(R.id.setting2);
+        simRadioGroup = findViewById(R.id.simRadioGroup);
+        sim1 = findViewById(R.id.sim1);
+        sim2 = findViewById(R.id.sim2);
         sharedPreferencesCustom = new SharedPreferencesCustom();
 
         sendMessageAvailable = sharedPreferencesCustom.loadSendMessageAvailable(MainActivity3.this);
@@ -89,5 +109,75 @@ public class MainActivity3 extends AppCompatActivity {
                 }
             }
         });
+
+        //load sim data form the shared preference
+        sim = sharedPreferencesCustom.loadSim(MainActivity3.this);
+        if(sim.equalsIgnoreCase("sim1")){
+            sim1.setChecked(true);
+        }else{
+            sim2.setChecked(true);
+        }
+
+        //check for dual sim
+        dualSim = onDetectDualSim(MainActivity3.this);
+        if(dualSim){
+            sim1.setChecked(true);
+            simRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                    if(i == R.id.sim1){
+                        if(simName1.isEmpty() || simName1.equalsIgnoreCase("no network connection") || simName1.equalsIgnoreCase("emergency calls only")){
+                            Toast.makeText(MainActivity3.this,"Cannot switch to Sim 1",Toast.LENGTH_LONG).show();
+                            sim1.setChecked(false);
+                            sharedPreferencesCustom.saveData(MainActivity3.this,"sim","sim2");
+                        }else{
+                            sim1.setChecked(true);
+                            sharedPreferencesCustom.saveData(MainActivity3.this,"sim","sim1");
+                        }
+                    }else{
+                        if(simName2.isEmpty() || simName2.equalsIgnoreCase("no network connection") || simName2.equalsIgnoreCase("emergency calls only")){
+                            Toast.makeText(MainActivity3.this,"Cannot switch to Sim 2",Toast.LENGTH_LONG).show();
+                            sim1.setChecked(true);
+                            sharedPreferencesCustom.saveData(MainActivity3.this,"sim","sim1");
+                        }else{
+                            sim2.setChecked(true);
+                            sharedPreferencesCustom.saveData(MainActivity3.this,"sim","sim2");
+                        }
+                    }
+                }
+            });
+        }else{
+            sim1.setChecked(true);
+            sim2.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private boolean onDetectDualSim(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            SubscriptionManager localSubscriptionManager = SubscriptionManager.from(context);
+            if (localSubscriptionManager.getActiveSubscriptionInfoCount() > 1) {
+                //implement code for 2 sims
+                List localList = localSubscriptionManager.getActiveSubscriptionInfoList();
+                SubscriptionInfo simInfo1 = (SubscriptionInfo) localList.get(0);
+                SubscriptionInfo simInfo2 = (SubscriptionInfo) localList.get(1);
+                simName1 = simInfo1.getCarrierName().toString();
+                simName2 = simInfo2.getCarrierName().toString();
+                dualSim = true;
+            }else{
+                //implement code for only 1 sim
+                List localList = localSubscriptionManager.getActiveSubscriptionInfoList();
+                SubscriptionInfo simInfo1 = (SubscriptionInfo) localList.get(0);
+                simName1 = simInfo1.getCarrierName().toString();
+                dualSim = false;
+            }
+        }
+        return dualSim;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        dualSim = onDetectDualSim(MainActivity3.this);
     }
 }

@@ -9,7 +9,4 @@
         android:icon="@drawable/ic_baseline_info_24"
         android:title="Details"
         app:showAsAction="collapseActionView"/>
-    <item android:id="@+id/checkForUpdate"
-        android:title="Check for updates"
-        app:showAsAction="collapseActionView"/>
 </menu>

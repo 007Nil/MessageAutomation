@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="220dp"
+            android:layout_marginTop="120dp"
             android:fontFamily="@font/capriola"
             android:text="Welcome"
             android:textColor="@color/colorPrimary"
@@ -58,6 +58,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"/>
         <RadioGroup
+            android:id="@+id/simRadioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">

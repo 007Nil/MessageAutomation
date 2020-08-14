@@ -123,14 +123,16 @@ public class MainActivity2 extends AppCompatActivity {
                         setData("available");
                         sharedPreferencesCustom.saveData(MainActivity2.this,"message",message.getText().toString());
                         //remove notification
-                        deleteNotification();
+                        //deleteNotification();
+                        createNotification(MainActivity2.this,status.getText().toString());
                         setAudioTo(status.getText().toString());
                     }else{
                         sharedPreferencesCustom.saveData(MainActivity2.this,"state","available");
                         setData("available");
                         sharedPreferencesCustom.saveData(MainActivity2.this,"message",message.getText().toString());
                         //remove notification
-                        deleteNotification();
+                        //deleteNotification();
+                        createNotification(MainActivity2.this,status.getText().toString());
                         setAudioTo(status.getText().toString());
                     }
                 }
@@ -205,25 +207,37 @@ public class MainActivity2 extends AppCompatActivity {
             meeting.setChecked(true);
             status.setText("In a meeting");
             message.setText(messageStored);
+            createNotification(MainActivity2.this,status.getText().toString());
+            setAudioTo(status.getText().toString());
         }else if(state.contains("game")){
             game.setChecked(true);
             status.setText("In a game");
             message.setText(messageStored);
+            createNotification(MainActivity2.this,status.getText().toString());
+            setAudioTo(status.getText().toString());
         }else if(state.contains("work")){
             work.setChecked(true);
             status.setText("In a work");
             message.setText(messageStored);
+            createNotification(MainActivity2.this,status.getText().toString());
+            setAudioTo(status.getText().toString());
         }else if(state.contains("driving")){
             awayFromPhone.setChecked(true);
             status.setText("Driving");
             message.setText(messageStored);
+            createNotification(MainActivity2.this,status.getText().toString());
+            setAudioTo(status.getText().toString());
         }else if(state.contains("sleep")){
             sleep.setChecked(true);
             status.setText("Sleeping");
             message.setText(messageStored);
+            createNotification(MainActivity2.this,status.getText().toString());
+            setAudioTo(status.getText().toString());
         }else if(state.contains("available")){
             available.setChecked(true);
             status.setText("Available");
+            createNotification(MainActivity2.this,status.getText().toString());
+            //setAudioTo(status.getText().toString());
             if(sharedPreferencesCustom.loadSendMessageAvailable(MainActivity2.this)){
                 message.setText("Sorry " + username + " isn't available." +
                         " Will get back to you as soon as available." +
@@ -251,12 +265,12 @@ public class MainActivity2 extends AppCompatActivity {
         }
     }
 
-    private void deleteNotification() {
+    /*private void deleteNotification() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.cancel(1);
         }
-    }
+    }*/
 
     private void createNotification(Context context, String status) {
         //Notification Code here
@@ -273,11 +287,9 @@ public class MainActivity2 extends AppCompatActivity {
                 .setOngoing(true)
                 .setContentIntent(contentIntent)
                 .build();
+
         notificationManagerCompat.notify(1,notification);
     }
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -299,8 +311,8 @@ public class MainActivity2 extends AppCompatActivity {
                 startActivity(changeActivity);
                 return true;
 
-            case R.id.checkForUpdate:
-                Toast.makeText(MainActivity2.this,"Updater to be implemented",Toast.LENGTH_LONG).show();
+            /*case R.id.checkForUpdate:
+                Toast.makeText(MainActivity2.this,"Updater to be implemented",Toast.LENGTH_LONG).show();*/
 
             default:
                 return super.onOptionsItemSelected(item);
