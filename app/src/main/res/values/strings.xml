@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">Message Automation</string>
+    <string name="app_info">Message Automation is an application build for automatically sending
+    a sms based on the mode set. It will basically look for an incoming call and will auto send
+    a sms to the incoming number.</string>
+    <string name="privacy">We are very concern about the privacy of our users. We would like to
+    inform all our users that this app do not store any kind of sensitive data of our users except
+        the details that given by our users for the app to function well.
+    \n\nThe purpose of each permission is given below :
+        \n\n\u2022 <b>Phone</b> : To detect any incoming calls in the device
+        \n\n\u2022 <b>Call logs</b> : To detect the incoming call\'s phone number
+        \n\n\u2022 <b>SMS</b> : To send sms to the caller of incoming call
+        \n\n\u2022 <b>Do not disturb</b> : To manage device audio state</string>
+    <string name="developerRounak">
+        <b>Rounak Roy</b>
+        \nAndroid Developer and UI Designer
+        \nStudent at Siliguri Institute of Technology
+        \n(Bachelor of Computer Applications)
+        \nEmail : rounakroy.slg@gmail.com
+    </string>
+    <string name="developerSagnik">
+        <b>Sagnik Sarkar</b>
+        \nCloud Administrator and Java Developer
+        \nStudent at Siliguri Institute of Technology
+        \n(Master of Computer Applications)
+        \nEmail : sagniksarkar@ymail.com
+    </string>
+    <string name="welcome">Welcome</string>
+    <string name="before_getting_started_please_enter_the_details">Before getting started please enter the details</string>
+    <string name="enter_your_name_here">Enter your name here</string>
+    <string name="select_preffered_sim">Select preferred sim option</string>
+    <string name="sim_1">Sim 1</string>
+    <string name="sim_2">Sim 2</string>
+    <string name="send_an_away_from_phone_message_when_mode_is_set_to_available">Send an away from phone message when mode is set to available</string>
+    <string name="submit">Submit</string>
+    <string name="hello">Hello</string>
+    <string name="you_are_currently">You are currently</string>
+    <string name="in_a_meeting">In a meeting</string>
+    <string name="in_a_game">In a game</string>
+    <string name="in_a_work">In a work</string>
+    <string name="away_from_phone">Away from phone</string>
+    <string name="available">Available</string>
+    <string name="turn_off">Turn off</string>
+    <string name="status">Status : </string>
+    <string name="message">Message : </string>
+    <string name="message_to_be_send">Message to be send</string>
+    <string name="sleeping">Sleeping</string>
+    <string name="driving">Driving</string>
+    <string name="stopped">Stopped</string>
+    <string name="no_message_send">No message will be send</string>
+    <string name="sendMessageAvailable">Sorry %1$s isn\'t available. Will get back to you as soon as available.
+        <b>\n\nMessage auto-sent from Message Automation.</b></string>
+    <string name="messageToBeSend">Hi there, %1$s is %2$s at the current moment. Will get back to you when available.
+                        \n\nMessage auto-sent from Message Automation.</string>
+    <string name="greetings">%1$s\n%2$s</string>
+</resources>
