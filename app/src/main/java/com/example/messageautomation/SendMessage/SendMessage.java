@@ -20,17 +20,19 @@ import java.util.List;
 
 public class SendMessage {
     private static final String TAG = "SendMessage";
+    private SubscriptionInfo simInfo;
+    private List localList;
     private SharedPreferencesCustom sharedPreferencesCustom = new SharedPreferencesCustom();
 
     @SuppressLint("MissingPermission")
     public void sendSMS(String phoneNo, String msg, Context context) {
         String sim = sharedPreferencesCustom.loadSim(context);
         try {
-            SmsManager smsManager = SmsManager.getDefault();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 SubscriptionManager localSubscriptionManager = SubscriptionManager.from(context);
+                localList = localSubscriptionManager.getActiveSubscriptionInfoList();
                 if (localSubscriptionManager.getActiveSubscriptionInfoCount() > 1) {
-                    List localList = localSubscriptionManager.getActiveSubscriptionInfoList();
+                    //localList = localSubscriptionManager.getActiveSubscriptionInfoList();
 
                     SubscriptionInfo simInfo1 = (SubscriptionInfo) localList.get(0);
                     SubscriptionInfo simInfo2 = (SubscriptionInfo) localList.get(1);
@@ -42,8 +44,12 @@ public class SendMessage {
                         //SendSMS From SIM Two
                         SmsManager.getSmsManagerForSubscriptionId(simInfo2.getSubscriptionId()).sendTextMessage(phoneNo, null, msg, null, null);
                     }
+                }else{
+                    simInfo = (SubscriptionInfo) localList.get(0);
+                    SmsManager.getSmsManagerForSubscriptionId(simInfo.getSubscriptionId()).sendTextMessage(phoneNo,null,msg,null,null);
                 }
             }else{
+                SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(phoneNo, null,msg, null, null);
             }
             //smsManager.sendTextMessage(phoneNo, null,msg, null, null);

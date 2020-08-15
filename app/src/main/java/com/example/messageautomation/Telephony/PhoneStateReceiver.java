@@ -56,16 +56,18 @@ public class PhoneStateReceiver extends BroadcastReceiver {
                                 case Activity.RESULT_OK:
                                     Toast.makeText(context, "Message Sent",Toast.LENGTH_LONG).show();
                                     break;
-
                                 case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
-                                    Toast.makeText(context,"Failed to send message",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context,"Please set a default sim for SMS",Toast.LENGTH_LONG).show();
                                     break;
 
                                 case SmsManager.RESULT_ERROR_NO_SERVICE:
                                     Toast.makeText(context,"No service available",Toast.LENGTH_LONG).show();
                                     break;
-                                default:
-                                    Toast.makeText(context,"Error! No message is sent",Toast.LENGTH_LONG).show();
+                                case SmsManager.RESULT_NO_DEFAULT_SMS_APP:
+                                        Toast.makeText(context,"Please set a default sms application",Toast.LENGTH_LONG).show();
+                                    break;
+                                /*default:
+                                    Toast.makeText(context,"Error! No message is sent",Toast.LENGTH_LONG).show();*/
                             }
                         }else{
                             Toast.makeText(context,"No message is sent",Toast.LENGTH_LONG).show();
@@ -80,15 +82,19 @@ public class PhoneStateReceiver extends BroadcastReceiver {
                                 break;
 
                             case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
-                                Toast.makeText(context,"Failed to send message",Toast.LENGTH_LONG).show();
+                                Toast.makeText(context,"Please set a default sim for SMS",Toast.LENGTH_LONG).show();
                                 break;
 
                             case SmsManager.RESULT_ERROR_NO_SERVICE:
                                 Toast.makeText(context,"No service available",Toast.LENGTH_LONG).show();
                                 break;
 
-                            default:
-                                Toast.makeText(context,"Error! No message is sent",Toast.LENGTH_LONG).show();
+                            case SmsManager.RESULT_NO_DEFAULT_SMS_APP:
+                                Toast.makeText(context,"Please set a default sms application",Toast.LENGTH_LONG).show();
+                                break;
+
+                            /*default:
+                                Toast.makeText(context,"Error! No message is sent",Toast.LENGTH_LONG).show();*/
                         }
 
                     }

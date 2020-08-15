@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="20dp"
         tools:context=".Activity.MainActivity">
@@ -20,20 +19,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/capriola"
-            android:text="Hello"
+            android:fontFamily="@font/droid_sans"
+            android:text="@string/hello"
             android:textColor="@color/colorPrimary"
-            android:textSize="40sp"
+            android:textSize="20sp"
             android:textStyle="normal" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="55dp"
-            android:fontFamily="@font/capriola"
-            android:text="You are currently"
+            android:fontFamily="@font/droid_sans"
+            android:text="@string/you_are_currently"
             android:textColor="@color/colorPrimary"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="normal" />
 
         <HorizontalScrollView
@@ -41,7 +40,7 @@
             android:layout_height="wrap_content">
             <RadioGroup
                 android:id="@+id/stateGroup"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
                 android:orientation="horizontal">
@@ -50,70 +49,67 @@
                     android:id="@+id/meeting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/capriola"
-                    android:text="In a meeting"
+                    android:layout_margin="10dp"
+                    android:buttonTint="@color/colorAccent"
+                    android:fontFamily="@font/droid_sans"
+                    android:text="@string/in_a_meeting"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="24sp"
-                    android:layout_margin="10dp"/>
+                    android:textSize="14sp" />
 
                 <RadioButton
                     android:id="@+id/game"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/capriola"
-                    android:text="In a game"
+                    android:layout_margin="10dp"
+                    android:buttonTint="@color/colorAccent"
+                    android:fontFamily="@font/droid_sans"
+                    android:text="@string/in_a_game"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="24sp"
-                    android:layout_margin="10dp"/>
+                    android:textSize="14sp" />
 
                 <RadioButton
                     android:id="@+id/work"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/capriola"
-                    android:text="In a work"
+                    android:layout_margin="10dp"
+                    android:buttonTint="@color/colorAccent"
+                    android:fontFamily="@font/droid_sans"
+                    android:text="@string/in_a_work"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="24sp"
-                    android:layout_margin="10dp"/>
+                    android:textSize="14sp" />
 
                 <RadioButton
-                    android:id="@+id/awayFromPhone"
+                    android:id="@+id/driving"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/capriola"
-                    android:text="Driving"
+                    android:layout_margin="10dp"
+                    android:buttonTint="@color/colorAccent"
+                    android:fontFamily="@font/droid_sans"
+                    android:text="@string/driving"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="24sp"
-                    android:layout_margin="10dp"/>
+                    android:textSize="14sp" />
 
                 <RadioButton
                     android:id="@+id/sleep"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/capriola"
-                    android:text="Sleeping"
+                    android:layout_margin="10dp"
+                    android:buttonTint="@color/colorAccent"
+                    android:fontFamily="@font/droid_sans"
+                    android:text="@string/sleeping"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="24sp"
-                    android:layout_margin="10dp"/>
+                    android:textSize="14sp" />
 
                 <RadioButton
                     android:id="@+id/available"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/capriola"
-                    android:text="Available"
+                    android:layout_margin="10dp"
+                    android:buttonTint="@color/colorAccent"
+                    android:fontFamily="@font/droid_sans"
+                    android:text="@string/available"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="24sp"
-                    android:layout_margin="10dp"/>
-
-                <RadioButton
-                    android:id="@+id/off"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/capriola"
-                    android:text="Turn off"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="24sp" />
+                    android:textSize="14sp" />
             </RadioGroup>
         </HorizontalScrollView>
         <LinearLayout
@@ -125,18 +121,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Status : "
+                android:fontFamily="@font/droid_sans"
+                android:text="@string/status"
                 android:textColor="@color/colorPrimary"
-                android:textSize="20sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Available"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/droid_sans"
+                android:text="@string/available"
                 android:textColor="@color/colorPrimary"
-                android:textSize="20sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -149,18 +148,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Message : "
+                android:fontFamily="@font/droid_sans"
+                android:text="@string/message"
                 android:textColor="@color/colorPrimary"
-                android:textSize="20sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Message to be send"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/droid_sans"
+                android:text="@string/message_to_be_send"
                 android:textColor="@color/colorPrimary"
-                android:textSize="20sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
