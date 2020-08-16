@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/droid_sans"
             android:padding="10dp"
-            android:text="Details about Message Automation"
+            android:text="@string/details_about_message_automation"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="26sp"
             android:textStyle="bold" />
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/droid_sans"
             android:padding="10dp"
-            android:text="About Privacy"
+            android:text="@string/about_privacy"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="26sp"
             android:textStyle="bold" />
@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/droid_sans"
             android:padding="10dp"
-            android:text="Developers"
+            android:text="@string/developers"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="26sp"
             android:textStyle="bold" />
@@ -130,7 +130,7 @@
             android:fontFamily="@font/droid_sans"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Made in INDIA"
+            android:text="@string/made_in_india"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp"
             android:textStyle="bold" />

@@ -21,7 +21,7 @@
             android:padding="10dp"
             android:text="@string/details_about_message_automation"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="26sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
         <View
             android:layout_width="match_parent"
@@ -54,7 +54,7 @@
             android:padding="10dp"
             android:text="@string/about_privacy"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="26sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <View
@@ -88,7 +88,7 @@
             android:padding="10dp"
             android:text="@string/developers"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="26sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
         <View
             android:layout_width="match_parent"

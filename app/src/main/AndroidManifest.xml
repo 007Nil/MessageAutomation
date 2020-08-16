@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.messageautomation">
+    package="com.s_and_r_funLabs.messageautomation">
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
@@ -11,22 +11,22 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
-        android:name=".App"
+        android:name="com.s_and_r_funLabs.messageautomation.App"
         android:allowBackup="true"
         android:icon="@drawable/ic_applogo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_applogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.MainActivity4" android:parentActivityName=".Activity.MainActivity2"></activity>
+        <activity android:name="com.s_and_r_funLabs.messageautomation.Activity.MainActivity4" android:parentActivityName="com.s_and_r_funLabs.messageautomation.Activity.MainActivity2"></activity>
         <activity
-            android:name=".Activity.MainActivity3"
-            android:parentActivityName=".Activity.MainActivity2" />
+            android:name="com.s_and_r_funLabs.messageautomation.Activity.MainActivity3"
+            android:parentActivityName="com.s_and_r_funLabs.messageautomation.Activity.MainActivity2" />
         <activity
-            android:name=".Activity.MainActivity2"
+            android:name="com.s_and_r_funLabs.messageautomation.Activity.MainActivity2"
             tools:ignore="MissingClass" />
         <activity
-            android:name=".Activity.SplashActivity"
+            android:name="com.s_and_r_funLabs.messageautomation.Activity.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,14 +35,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.MainActivity"
+            android:name="com.s_and_r_funLabs.messageautomation.Activity.MainActivity"
             android:theme="@style/AppTheme1" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <receiver android:name=".Telephony.PhoneStateReceiver">
+        <receiver android:name="com.s_and_r_funLabs.messageautomation.Telephony.PhoneStateReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE" />
                 <action android:name="android.intent.action.READ_CALL_LOG" />

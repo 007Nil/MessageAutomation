@@ -5,7 +5,7 @@ android {
     buildToolsVersion "30.0.1"
 
     defaultConfig {
-        applicationId "com.example.messageautomation"
+        applicationId "com.s_and_r_funLabs.messageautomation"
         minSdkVersion 22
         targetSdkVersion 30
         versionCode 1

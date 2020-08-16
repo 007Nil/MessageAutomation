@@ -4,13 +4,14 @@
     a sms based on the mode set. It will basically look for an incoming call and will auto send
     a sms to the incoming number.</string>
     <string name="privacy">We are very concern about the privacy of our users. We would like to
-    inform all our users that this app do not store any kind of sensitive data of our users except
-        the details that given by our users for the app to function well.
+    inform all our users that this app do not store any kind of sensitive data of our users except for
+        the username that is given by our users for the app to function well.
     \n\nThe purpose of each permission is given below :
         \n\n\u2022 <b>Phone</b> : To detect any incoming calls in the device
         \n\n\u2022 <b>Call logs</b> : To detect the incoming call\'s phone number
         \n\n\u2022 <b>SMS</b> : To send sms to the caller of incoming call
-        \n\n\u2022 <b>Do not disturb</b> : To manage device audio state</string>
+        \n\n\u2022 <b>Do not disturb</b> : To manage device audio state
+        \n\n\u2022 <b>Notification</b> : To manage notifications</string>
     <string name="developerRounak">
         <b>Rounak Roy</b>
         \nAndroid Developer and UI Designer
@@ -37,7 +38,7 @@
     <string name="you_are_currently">You are currently</string>
     <string name="in_a_meeting">In a meeting</string>
     <string name="in_a_game">In a game</string>
-    <string name="in_a_work">In a work</string>
+    <string name="in_a_work">In work</string>
     <string name="away_from_phone">Away from phone</string>
     <string name="available">Available</string>
     <string name="turn_off">Turn off</string>
@@ -53,4 +54,10 @@
     <string name="messageToBeSend">Hi there, %1$s is %2$s at the current moment. Will get back to you when available.
                         \n\nMessage auto-sent from Message Automation.</string>
     <string name="greetings">%1$s\n%2$s</string>
+    <string name="details_about_message_automation">Details about Message Automation</string>
+    <string name="about_privacy">About Privacy</string>
+    <string name="developers">Developers</string>
+    <string name="made_in_india">Made in INDIA</string>
+    <string name="enable_service">Enable Service</string>
+    <string name="change_username">Change username</string>
 </resources>
