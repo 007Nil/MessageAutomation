@@ -94,6 +94,7 @@ public class MainActivity3 extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         sharedPreferencesCustom.saveData(MainActivity3.this,"username",input.getText().toString());
+                        Toast.makeText(MainActivity3.this,"Username changed",Toast.LENGTH_LONG).show();
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

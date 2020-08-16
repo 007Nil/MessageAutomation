@@ -112,7 +112,7 @@ public class MainActivity2 extends AppCompatActivity {
         }
     }
 
-    private void initData(String state, String username) {
+    public void initData(String state, String username) {
         switch (state){
             case "meeting":
                 meeting.setChecked(true);
