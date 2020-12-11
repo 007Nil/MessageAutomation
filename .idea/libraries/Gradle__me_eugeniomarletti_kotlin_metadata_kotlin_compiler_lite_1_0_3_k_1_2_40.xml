@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: me.eugeniomarletti.kotlin.metadata:kotlin-compiler-lite:1.0.3-k-1.2.40">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.eugeniomarletti.kotlin.metadata/kotlin-compiler-lite/1.0.3-k-1.2.40/a16e967c276379eaf6e1fa03af77664f003db947/kotlin-compiler-lite-1.0.3-k-1.2.40.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.eugeniomarletti.kotlin.metadata/kotlin-compiler-lite/1.0.3-k-1.2.40/38b02e0f55cf6e9c52a006e83af9f5a2da896f4a/kotlin-compiler-lite-1.0.3-k-1.2.40-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.eugeniomarletti.kotlin.metadata/kotlin-compiler-lite/1.0.3-k-1.2.40/e9ea26600601f4b2b1397055da065aa3440af2a4/kotlin-compiler-lite-1.0.3-k-1.2.40-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
